@@ -5,6 +5,8 @@ const sortZ = document.querySelector("#sortZ")
 const sortMarks = document.querySelector("#sort_marks")
 const sortClass = document.querySelector("#sort_class")
 const sortPass = document.getElementById("sort_pass")
+const gender = document.getElementById("sort_gender")
+const sort = document.getElementsByClassName("sort")
 const data =
     [{ "id": 1, "first_name": "Chadwick", "last_name": "Ayre", "email": "cayre0@cam.ac.uk", "gender": "Male", "img_src": "https://robohash.org/corporisquiaperiam.png?size=50x50&set=set1", "class": 11, "marks": 18, "passing": false, "city": "Moorreesburg" },
     { "id": 2, "first_name": "Abrahan", "last_name": "Seabrocke", "email": "aseabrocke1@ocn.ne.jp", "gender": "Male", "img_src": "https://robohash.org/autiuredistinctio.png?size=50x50&set=set1", "class": 3, "marks": 27, "passing": true, "city": "Kampong Thom" },
@@ -106,7 +108,7 @@ const data =
     { "id": 98, "first_name": "Drugi", "last_name": "Bordone", "email": "dbordone2p@slate.com", "gender": "Male", "img_src": "https://robohash.org/autminimanulla.png?size=50x50&set=set1", "class": 4, "marks": 63, "passing": true, "city": "Senekal" },
     { "id": 99, "first_name": "Gordon", "last_name": "Vieyra", "email": "gvieyra2q@geocities.com", "gender": "Male", "img_src": "https://robohash.org/nullaeumaut.png?size=50x50&set=set1", "class": 11, "marks": 59, "passing": false, "city": "Nīkshahr" },
     { "id": 100, "first_name": "Zoe", "last_name": "Moorhead", "email": "zmoorhead2r@sfgate.com", "gender": "Female", "img_src": "https://robohash.org/fugiatcorporisdeleniti.png?size=50x50&set=set1", "class": 8, "marks": 43, "passing": true, "city": "Makin Village" }]
-
+console.log(data)
 let arr = Array.from(data)
 console.log(arr)
 
@@ -200,15 +202,30 @@ function sort_arrayZ(arr, sort) {
 }
 sortPass.addEventListener('click',pass)
 function pass () {
-    table.innerHTML=""
+    // table.innerHTML=""
     let filterData = arr.filter((item)=>{
         return item.passing == true
       })
          updateDom(filterData)
 }
 // sort gender
+function sortGender () {
+    let arr = []
+    data.forEach((item) => {
+        if(item.gender == "Male"){
+            arr.push(item)
+        }
+    })
+    data.forEach((item) => {
+        if(item.gender == "Female"){
+            arr.push(item)
+        }
 
+    })
+    updateDom(arr)
+}
 
+gender.addEventListener("click",sortGender)
 
 
 
@@ -224,4 +241,7 @@ const search = (arr,sort) => {
     })
     updateDom(filterData)
 }
-search_input.addEventListener('keyup', search(arr,'first_name'))
+search_input.addEventListener('keyup',(e)=>{
+    e.preventDefault()
+    search(arr,"first_name")
+})
