@@ -6,7 +6,8 @@ const sortMarks = document.querySelector("#sort_marks")
 const sortClass = document.querySelector("#sort_class")
 const sortPass = document.getElementById("sort_pass")
 const gender = document.getElementById("sort_gender")
-const sort = document.getElementsByClassName("sort")
+const search = document.getElementById("search_input")
+
 const data =
     [{ "id": 1, "first_name": "Chadwick", "last_name": "Ayre", "email": "cayre0@cam.ac.uk", "gender": "Male", "img_src": "https://robohash.org/corporisquiaperiam.png?size=50x50&set=set1", "class": 11, "marks": 18, "passing": false, "city": "Moorreesburg" },
     { "id": 2, "first_name": "Abrahan", "last_name": "Seabrocke", "email": "aseabrocke1@ocn.ne.jp", "gender": "Male", "img_src": "https://robohash.org/autiuredistinctio.png?size=50x50&set=set1", "class": 3, "marks": 27, "passing": true, "city": "Kampong Thom" },
@@ -227,21 +228,16 @@ function sortGender () {
 
 gender.addEventListener("click",sortGender)
 
-
-
-//search function
-// const search_btn = document.querySelector("#search")
-const search_input = document.getElementById("search_input")
-
-const search = (arr,sort) => {
-    let filter = search_input.value.toUpperCase()
-    console.log(filter)
-    let filterData = arr.filter((item) => {
-        return item[sort] == filter 
-    })
-    updateDom(filterData)
-}
-search_input.addEventListener('keyup',(e)=>{
-    e.preventDefault()
-    search(arr,"first_name")
+search.addEventListener("input" ,e => {
+    let val = e.target.value;
+    searc(val)
+    // console.log(val)
 })
+//search function
+function searc (val) {
+    let searchData = data.filter((item) => {
+        return item.email.toLowerCase().includes(val.toLowerCase())|| item.first_name.toLowerCase().includes(val.toLowerCase())||item.last_name.toLowerCase().includes(val.toLowerCase())
+    })
+    updateDom(searchData)
+}
+
